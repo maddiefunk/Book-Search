@@ -4,7 +4,7 @@ import db from './config/connection.js';
 import routes from './routes/index.js';
 
 import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@as-integrations/express';
+import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './schemas/index.js';
 import { getUserFromToken } from './services/auth.js';
 
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/graphql', expressMiddleware(apolloServer, {
-  context: async ({ req }) => {
+  context: async ({ req }:{req: any}) => {
     const user = getUserFromToken(req.headers.authorization);
     return { user };
   },
