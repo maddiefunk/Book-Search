@@ -14,15 +14,11 @@ const resolvers: IResolvers = {
             context.req.params.id = context.req.user?._id;
             return userController.getSingleUser(context.req, context.res);
         },
-        user: (_parent, _args, context: MyContext) => {
-            context.req.params = _args;
-            return userController.getSingleUser(context.req, context.res);
-        },
     },
 
     Mutation: {
 
-        createUser: (_parent, args, context) => {
+        addUser: (_parent, args, context) => {
             context.req.body = args;
             return userController.createUser(context.req, context.res);
         },
@@ -34,7 +30,7 @@ const resolvers: IResolvers = {
             context.req.body = args;
             return userController.saveBook(context.req, context.res);
         },
-        deleteBook: (_parent, args, context) => {
+        removeBook: (_parent, args, context) => {
             context.req.body = args;
             return userController.deleteBook(context.req, context.res);
         },
